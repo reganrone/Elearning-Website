@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Classroom Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007BFF;
+            font-size: 24px;
+            padding: 20px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #007BFF;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Classroom: {{ classroom.name }}</h1>
+    <p>Description: {{ classroom.description }}</p>
+    <h2>Quizzes</h2>
+    <ul>
+        {% for quiz in quizzes %}
+        <li><a href="{% url 'students:quizView' quiz.id %}">{{ quiz.title }}</a></li>
+        {% empty %}
+        <li>No quizzes available.</li>
+        {% endfor %}
+    </ul>
+    <p>Your Letter Grade: {{ letter_grade }}</p>
+</body>
+
+</html>

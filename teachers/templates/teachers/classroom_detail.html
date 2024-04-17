@@ -1,0 +1,51 @@
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #007BFF;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #007BFF;
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-link {
+        text-decoration: none;
+        color: #007BFF;
+        font-size: 18px;
+    }
+</style>
+
+<h1>Classroom: {{ classroom.name }}</h1>
+<p>Description: {{ classroom.description }}</p>
+
+<h2>Add Students</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enroll Students</button>
+</form>
+<li><a href="{% url 'teachers:create_quiz' classroom.id %}" class="btn-link">Create Quiz</a></li>
+<li><a href="{% url 'teachers:create_lesson' classroom.id %}" class="btn-link">Create Lessons</a></li>

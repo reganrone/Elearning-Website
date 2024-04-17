@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .welcome-text {
+            font-size: 36px;
+            /* Increased font size for the welcome text */
+            margin-bottom: 20px;
+        }
+
+        .center-box {
+            background-color: #f0f0f0;
+            padding: 30px;
+            /* Increased padding for the box */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .button-box {
+            margin-top: 20px;
+        }
+
+        .button-box a {
+            display: inline-block;
+            width: 150px;
+            /* Increased width for the buttons */
+            margin: 10px;
+            /* Increased margin for the buttons */
+            padding: 15px;
+            /* Increased padding for the buttons */
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            /* Increased font size for the buttons */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="welcome-text">
+        Online Learning
+    </div>
+
+    <div class="center-box">
+        <nav>
+            <span style="float:right">
+                {% if user.is_authenticated %}
+                <span>Hi {{user.username}}! </span>
+                <span><a href="{% url 'logout' %}" class="button">Logout</a></span>
+                {% else %}
+                <span class="button-box"><a href="{% url 'login' %}" class="button">Login</a></span>
+                {% endif%}
+            </span>
+        </nav>
+
+        <div class="button-box">
+            {% if not user.is_authenticated %}
+            <span><a href="{% url 'signup' %}" class="button">Sign up</a></span>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

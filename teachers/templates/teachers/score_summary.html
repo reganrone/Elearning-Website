@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scores Summary</title>
+</head>
+
+<body>
+    <h1>Quiz Scores Summary</h1>
+    <h2>Quiz: {{ quiz.title }}</h2>
+
+    <h3>Highest Score</h3>
+    {% if highest %}
+    <p>Highest Score: {{ highest }}</p>
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    <h3>Lowest Score</h3>
+    {% if lowest %}
+    <p>Lowest Score: {{ lowest }}</p>
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+
+    <h3>Average Score</h3>
+    {% if average %}
+    <p>Average Score: {{ average }}</p>
+    {% else %}
+    <p>No data available</p>
+    {% endif %}
+    <a href="{% url 'teachers:home' %}" class="back-link">Back to Home</a>
+</body>
+
+</html>

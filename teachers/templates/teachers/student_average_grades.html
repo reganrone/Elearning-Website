@@ -1,0 +1,12 @@
+<h1>Student Average Grades</h1>
+<p>Student: {{ student.username }}</p>
+
+<ul>
+    {% for classroom, values in average_grades.items %}
+    <li>
+        Classroom: {{ classroom }}
+        Weighted Average Grade: {{ values.weighted_average_grade }}
+        Letter Grade: {{ values.letter_grade }}
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Grades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="get" action="">
+        {{ form.keyword.label_tag }}
+        {{ form.keyword }}
+        <button type="submit">Search</button>
+    </form>
+
+
+    <h1>View Grades</h1>
+    <a href="?sort=asc">Sort by Ascending</a>
+    <a href="?sort=desc">Sort by Descending</a>
+
+    {% for classroom, classroom_grades in grouped_grades.items %}
+    <h2>{{ subject }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Student</th>
+                <th>Quiz</th>
+                <th>Grade</th>
+                <th>Answers</th>
+                <th>Gradebook</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in classroom_grades %}
+            <tr>
+                <td>{{ grade.quiz.classroom.name }}</td>
+                <td>{{ grade.student.username }}</td>
+                <td>{{ grade.quiz.title }}</td>
+                <td>{{ grade.grade }}</td>
+                <td><a href="{% url 'teachers:view_quiz_details' grade.id %}">View Answers</a></td>
+                <td><a href="{% url 'teachers:student_average_grades' grade.student.id %}">View Gradebook</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+
+    <a href="{% url 'teachers:home' %}">Back to Home</a>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"] {
+            display: block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create Quiz</h1>
+    <form method="post" action="{% url 'teachers:create_quiz' classroom_id=classroom.id %}">
+        {% csrf_token %}
+
+        <label for="{{ form.classroom.id_for_label }}">Select Classroom:</label>
+        {% for classroom in classrooms %}
+        <option value="{{ classroom.id }}">{{ classroom.name }}</option>
+        {% endfor %}
+        </select>
+
+        {{ form.as_p }}
+
+        {{ question_formset.management_form }}
+        {% for question_form in question_formset %}
+        {{ question_form.as_p }}
+        {% endfor %}
+
+        <button type="submit">Create Quiz</button>
+    </form>
+    <a href="{% url 'teachers:view_grades' %}">View Grades</a>
+</body>

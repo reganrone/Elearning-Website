@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ quiz.title }} Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #555;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>{{ quiz.title }} Details</h1>
+    <p>Description: {{ quiz.description }}</p>
+    <a href="{% url 'teachers:score_summary' quiz.id %}">Quiz Score Details</a>
+
+    <form method="post" action="{% url 'teachers:update_quiz_weight' quiz.id %}">
+        {% csrf_token %}
+        <label for="quiz_weight">Quiz Weight:</label>
+        <input type="number" id="quiz_weight" name="quiz_weight" value="{{ quiz.weight }}" min="0" max="100">
+        <button type="submit">Update Weight</button>
+    </form>
+
+    <h2>Questions:</h2>
+    <ul>
+        {% for question in questions %}
+        <li>
+            {{ question.question_text }}
+            <ul>
+                <li>{{ question.option1 }}</li>
+                <li>{{ question.option2 }}</li>
+                <li>{{ question.option3 }}</li>
+                <li>{{ question.option4 }}</li>
+            </ul>
+            Correct Answer: {{ question.correct_answer }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'teachers:list_quizzes' %}">Back to Quizzes</a>
+</body>
+
+</html>

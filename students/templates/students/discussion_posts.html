@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Discussion Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar" style="background-color: #333; padding: 10px;">
+        <a href="{% url 'students:home' %}"
+            style="color: #fff; text-decoration: none; font-weight: bold; font-size: 18px;">Home</a>
+    </div>
+    <div class="container">
+        <h1>Discussion Posts</h1>
+
+        <ul>
+            {% for post in posts %}
+            <li>
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+                <p>Posted by {{ post.author }} on {{ post.created_at }}</p>
+                {% if post.file_upload %}
+                <h2>Uploaded File</h2>
+
+                <p><a href="{{ post.file_upload.url }}" target="_blank">{{ post.file_upload.name }}</a></p>
+                {% endif %}
+
+
+
+                <form method="post" action="{% url 'students:discussion_post_detail' post.id %}">
+                    {% csrf_token %}
+
+
+                    <button type="submit">Add a Comment</button>
+                </form>
+            </li>
+            {% empty %}
+            <li>No discussion posts available.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'students:create_discussion_post' %}" class="btn btn-primary">Create a New Discussion Post</a>
+    </div>
+</body>
+
+</html>

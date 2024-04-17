@@ -1,0 +1,51 @@
+<style>
+  body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    font-size: 28px;
+    color: #007BFF;
+  }
+
+  form {
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  label {
+    font-size: 20px;
+    display: block;
+    margin-top: 10px;
+  }
+
+  select {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+</style>
+
+<h1>Create a New Lesson</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <label for="{{ form.classroom.id_for_label }}" style="font-size: 20px; display: block; margin-top: 10px;">Select
+    Classroom:</label>
+  <select name="{{ form.classroom.name }}">
+    {% for classroom in classrooms %}
+    <option value="{{ classroom.id }}" style="font-size: 18px; margin-top: 10px;">{{ classroom.name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Create Lesson</button>
+</form>

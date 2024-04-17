@@ -1,0 +1,25 @@
+{% block content %}
+
+<div id="coursediv">
+    <div id="grades-wrapper">
+        {% for grade in grades %}
+        <div class="grades">
+            <span>{{grade.student.username}}</span>
+            <span>{{grade.grade}}</span>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="close">Close</div>
+</div>
+<div id="contentwrapper">
+    <div id="content">
+        <div id="tagwrapper">
+            <h2>{{quiz.title}}</h2>
+            <a class="tags" href="">Visibility</a>
+            <span>{{quiz.id}}</span>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Student Dashboard</title>
+</head>
+
+<body>
+    <h2>Your Quiz Percentiles:</h2>
+    <ul>
+        {% for quiz_data in quiz_percentiles %}
+        <li>
+            {{ quiz_data.quiz.title }} -
+            {% if quiz_data.student_percentile is not None %}
+            {{ quiz_data.student_percentile }} percentile
+            {% else %}
+            Not available
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

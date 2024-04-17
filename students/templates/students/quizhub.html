@@ -1,0 +1,17 @@
+{% block content %}
+
+<div id="contentwrapper">
+    <div id="content">
+        <h2>Quizes</h2>
+        <div id="posts-wrapper">
+            {% for quiz in quizzes %}
+            <div class="quizes" data-class-id="{{ quiz.id }}">
+                <a href="{% url 'students:quizView' quiz.id %}">
+                    <strong>{{ quiz.title }}</strong> - {{ quiz.created_at }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

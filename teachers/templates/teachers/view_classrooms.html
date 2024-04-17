@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Classrooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        li strong {
+            font-size: 18px;
+            color: #007BFF;
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .empty-list {
+            text-align: center;
+            font-style: italic;
+            color: #777;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{% url 'teachers:create_classroom' %}" class="btn">Create New Classroom</a>
+    <h1>Classrooms</h1>
+    <ul>
+        {% for classroom in classrooms %}
+        <li>
+            <a href="{% url 'teachers:classroom_detail' classroom.id %}">{{ classroom.name }}</a><br>
+            <div>
+                Description: {{ classroom.description }}<br>
+                Teacher: {{ classroom.teacher.username }}
+            </div>
+        </li>
+        {% empty %}
+        <li class="empty-list">No classrooms available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'teachers:home' %}" class="back-link">Back to Home</a>
+</body>
+
+</html>

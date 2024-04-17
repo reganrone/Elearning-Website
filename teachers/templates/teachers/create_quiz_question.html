@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz Question</title>
+</head>
+
+<body>
+    <h1>Create Quiz Question</h1>
+    <form method="post" action="{% url 'teachers:create_quiz_question' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Question</button>
+        <button class="btn"></button>
+        Add Question
+        </button>
+        <button type="button" class="btn" id="cancel">
+            Cancel
+        </button>
+    </form>
+    </div>
+    </div>
+    <div id="contentwrapper">
+        <div id="content">
+            <div id="wrapper">
+                <h2>{{quiz.title}}</h2>
+                <div id="quiz-wrapper">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for question in questions %}
+                        <div class="questions">
+                            <h3>Question {{ forloop.counter }}</h3>
+                            <p>{{ question.question_text }}</p>
+                            {% if question.option1 %}
+                            <label>
+                                <input type="radio" name="answer" value="1"> {{ question.option1 }}
+                            </label><br>
+                            {% endif %}
+                            {% if question.option2 %}
+                            <label>
+                                <input type="radio" name="answer" value="2"> {{ question.option2 }}
+                            </label><br>
+                            {% endif %}
+                            {% if question.option3 %}
+                            <label>
+                                <input type="radio" name="answer" value="3"> {{ question.option3 }}
+                            </label><br>
+                            {% endif %}
+                            {% if question.option4 %}
+                            <label>
+                                <input type="radio" name="answer" value="4"> {{ question.option4 }}
+                            </label><br>
+                            {% endif %}
+                        </div>
+
+                        {% endfor %}
+
+                    </form>
+                </div>
+                <div id="add-question">Add Question</div>
+            </div>
+
+            </form>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!-- Create Quiz Form -->
+<form method="post" action="{% url 'teachers:create_quiz' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Quiz</button>
+</form>
+
+<!-- Record Grade Form -->
+<form method="post" action="{% url 'teachers:record_grade' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Record Grade</button>
+</form>
+
+<!-- View Grades -->
+<table>
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Quiz</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for grade in grades %}
+        <tr>
+            <td>{{ grade.student.username }}</td>
+            <td>{{ grade.quiz.title }}</td>
+            <td>{{ grade.grade }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

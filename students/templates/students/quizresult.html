@@ -1,0 +1,25 @@
+<!-- Display the questions and the student's answers -->
+<h1>Quiz Result: {{ quiz.title }}</h1>
+<p>Attempt Number: {{ previous_attempts }}</p>
+
+{% for question in questions %}
+<div class="question">
+    <p>{{ question.question_text }}</p>
+    <p>Your Answer: {{ question.selected_answer }}</p>
+    <p>Correct Answer: {{ question.correct_answer }}</p>
+    {% if question.selected_answer == question.correct_answer %}
+    <p style="color: green;">Correct</p>
+    {% else %}
+    <p style="color: red;">Incorrect</p>
+    {% endif %}
+</div>
+{% endfor %}
+
+<!-- Display the overall grade -->
+<h2>Your Grade: {{ grade.grade }}%</h2>
+
+<li><a href="{% url 'students:home' %}">Home</a></li>
+<!-- Offer the option to retake the quiz -->
+{% if grade.grade < 100 %} <a href="{% url 'students:quizView' quiz.id %}" class="btn">
+    Retake Quiz</a>
+    {% endif %}
